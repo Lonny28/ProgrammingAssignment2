@@ -1,38 +1,41 @@
-## This is programming assignment 2, where I will attempt to write
-## two functions.  The first will Cache the mean of a vector,
-## the second will cache the inverse of the matrix from the first function.
+## This is programming assignment 2, where I will attempt to modify
+## two functions.  The first will set up the cache for the matrix,
+## the second will either solve the matrix and store it, or pull the
+## soution if it has already been solved.
 
 ## Here is the first function, called makeCacheMatrix
-## Note 
+## I'm just taking the example from the assignment and changing
+##numeric to matrix, and mean to solve (and of course the name of the function)
 
 makeCacheMatrix <- function(x = matrix()) {
-        m<-NULL
-        set<-function(y){
-                x<<-y
-                m<<-NULL
+        m <- NULL
+        set <- function(y) {
+                x <<- y
+                m <<- NULL
         }
-        get<-function() x
-        setmatrix<-function(solve) m<<- solve
-        getmatrix<-function() m
-        list(set=set, get=get,
-             setmatrix=setmatrix,
-             getmatrix=getmatrix)
+        get <- function() x
+        setsolve <- function(solve) m <<- solve
+        getsolve <- function() m
+        ## for each row in the list, these four items get stored
+        list(set = set, get = get,
+             setsolve = setsolve,
+             getsolve = getsolve)
 }
 
-
 ## The second function cache solve follows.
-## I'll add more code as I go
+## Same thing here, just taking the example and using solve instead of mean
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
-        m<-x$getmatrix()
-        if(!is.null(m)){
+        ## grab whtever is in the getsolve slot
+        m <- x$getsolve()
+        ##if it's not null, then return whatever is in there and be done
+        if(!is.null(m)) {
                 message("getting cached data")
                 return(m)
         }
-        matrix<-x$get()
-        m<-solve(matrix, ...)
-        x$setmatrix(m)
+        ##otherwise, solve it, stick it in x$setsolve and return it
+        data <- x$get()
+        m <- solve(data, ...)
+        x$setsolve(m)
         m
-
 }
