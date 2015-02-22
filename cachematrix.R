@@ -3,6 +3,15 @@
 ## the second will either solve the matrix and store it, or pull the
 ## soution if it has already been solved.
 
+## here is how I tested my code to make sure it works - I used this test matrix:
+Test<-matrix(c(9,1,3,6,13,11,7,0,5,7,4,7,2,6,1,10),nrow=4,ncol=4)
+## I typed: solvetest<-makeCacheMatrix(Test)
+## then: cacheSolve(solvetest)
+## then: cacheSolve(solvetest)
+## the first time it returned the solution, the second it said:
+## "Getting Cached Data" before returning the same solution
+
+
 ## Here is the first function, called makeCacheMatrix
 ## I'm just taking the example from the assignment and changing
 ##numeric to matrix, and mean to solve (and of course the name of the function)
